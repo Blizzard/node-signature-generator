@@ -117,8 +117,6 @@ const getSignature = (name, realm) => {
     .then(getImage);
 };
 
-app.get("/classes", (req, res) => getClasses().then(res.json.bind(res)));
-
 app.get("/:realm/:name", (req, res) =>
   getSignature(req.params.name, req.params.realm)
     .then(buffer => {
@@ -129,11 +127,5 @@ app.get("/:realm/:name", (req, res) =>
       res.json(err.message);
     })
 );
-
-app.get("/", (req, res) => {
-  return getToken()
-    .then(res.json.bind(res))
-    .catch(err => res.json(err.message));
-});
 
 module.exports = app;
