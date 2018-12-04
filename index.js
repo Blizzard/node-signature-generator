@@ -57,9 +57,7 @@ const getImage = character => {
   return new Promise((resolve, reject) => {
     gm(720, 120)
       .in("-page", "+2+2")
-      .in(
-        "https://render-us.worldofwarcraft.com/character/bronzebeard/181/33229493-inset.jpg"
-      )
+      .in(`https://render-us.worldofwarcraft.com/character/${character.thumbnail.replace("-avatar.jpg", "-inset.jpg")}`)
       .in("-page", "+0+0")
       .in("./images/background-0.png")
       .mosaic()
