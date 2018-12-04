@@ -7,7 +7,12 @@
   "author": "Blizzard Entertainment",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.3",
     "express": "^4.16.4",
-    "gm": "^1.23.1"
+    "gm": "^1.23.1",
+    "ramda": "^0.26.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "simple-oauth2": "^2.2.1"
   }
 }

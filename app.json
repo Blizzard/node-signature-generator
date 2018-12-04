@@ -1,5 +1,14 @@
 {
   "name": "Sample Signature Generator - Node.js",
   "description": "A sample app using the Blizzard Developer APIs",
-  "repository": "https://github.com/blizzard/sample-signature-generator-node"
+  "env": {
+    "CLIENT_ID": {
+      "description": "The Client ID from develop.battle.net",
+      "value": ""
+    },
+    "CLIENT_SECRET": {
+      "description": "The Client Secret from develop.battle.net",
+      "value": ""
+    }
+  }
 }
