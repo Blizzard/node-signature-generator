@@ -1,0 +1,13 @@
+{
+  "name": "sample-signature-generator-node",
+  "version": "0.0.1",
+  "description": "A sample app using APIs from develop.battle.net",
+  "main": "index.js",
+  "repository": "https://github.com/blizzard/sample-signature-generator-node",
+  "author": "Blizzard Entertainment",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "gm": "^1.23.1"
+  }
+}

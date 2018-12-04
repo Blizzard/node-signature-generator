@@ -1,0 +1,5 @@
+{
+  "name": "Sample Signature Generator - Node.js",
+  "description": "A sample app using the Blizzard Developer APIs",
+  "repository": "https://github.com/blizzard/sample-signature-generator-node"
+}
