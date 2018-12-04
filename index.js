@@ -59,7 +59,7 @@ const getImage = character => {
       .in("-page", "+2+2")
       .in(`https://render-us.worldofwarcraft.com/character/${character.thumbnail.replace("-avatar.jpg", "-inset.jpg")}`)
       .in("-page", "+0+0")
-      .in("./images/background-0.png")
+      .in(`./images/background-${character.faction}.png`)
       .mosaic()
       .font("./fonts/merriweather/Merriweather-Bold.ttf")
       .fontSize("30")
