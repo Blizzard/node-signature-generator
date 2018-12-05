@@ -13,6 +13,7 @@
     "ramda": "^0.26.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
-    "simple-oauth2": "^2.2.1"
+    "simple-oauth2": "^2.2.1",
+    "throng": "^4.0.0"
   }
 }
