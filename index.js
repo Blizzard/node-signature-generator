@@ -1,6 +1,9 @@
 const Promise = require("bluebird");
+const request = require("request");
 const rp = require("request-promise");
 const R = require("ramda");
+const tmp = require("tmp");
+const fs = require("fs");
 
 // Heroku has imageMagick avaialble
 const gm = require("gm").subClass({ imageMagick: true });
@@ -55,40 +58,58 @@ const getClasses = () => {
 
 const getImage = character => {
   return new Promise((resolve, reject) => {
-    gm(720, 120)
-      .in("-page", "+2+2")
-      .in(`https://render-us.worldofwarcraft.com/character/${character.thumbnail.replace("-avatar.jpg", "-inset.jpg")}`)
-      .in("-page", "+0+0")
-      .in(`./images/background-${character.faction}.png`)
-      .mosaic()
-      .font("./fonts/merriweather/Merriweather-Bold.ttf")
-      .fontSize("30")
-      .fill("#deaa00")
-      .drawText(220, 40, character.name)
-      .font("./fonts/merriweather/Merriweather-Regular.ttf")
-      .fontSize("12")
-      .fill("#888888")
-      .drawText(
-        220,
-        65,
-        `Level ${character.level} ${character.className} ${
-          character.guild ? `of <${character.guild.name}> ` : ""
-        }on ${character.realm}`
-      )
-      .drawText(
-        220,
-        85,
-        `Item Level: ${character.items.averageItemLevel} (${
-          character.items.averageItemLevelEquipped
-        })`
-      )
-      .drawText(220, 105, `Achievement Points: ${character.achievementPoints}`)
-      .toBuffer("PNG", (err, buffer) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(buffer);
-        }
+    const avatarUrl = `https://render-us.worldofwarcraft.com/character/${character.thumbnail.replace(
+      "-avatar.jpg",
+      "-inset.jpg"
+    )}`;
+
+    const tmpName = tmp.tmpNameSync();
+
+    // Download avatar
+    request(avatarUrl)
+      .pipe(fs.createWriteStream(tmpName))
+      .on("finish", () => {
+        gm("./empty.png")
+          .in("-page", "+2+2")
+          .in(tmpName)
+          .in("-page", "+0+0")
+          .in(`./images/background-${character.faction}.png`)
+          .mosaic()
+          .font("./fonts/merriweather/Merriweather-Bold.ttf")
+          .fontSize("30")
+          .fill("#deaa00")
+          .drawText(220, 40, character.name)
+          .font("./fonts/merriweather/Merriweather-Regular.ttf")
+          .fontSize("12")
+          .fill("#888888")
+          .drawText(
+            220,
+            65,
+            `Level ${character.level} ${character.className} ${
+              character.guild ? `of <${character.guild.name}> ` : ""
+            }on ${character.realm}`
+          )
+          .drawText(
+            220,
+            85,
+            `Item Level: ${character.items.averageItemLevel} (${
+              character.items.averageItemLevelEquipped
+            })`
+          )
+          .drawText(
+            220,
+            105,
+            `Achievement Points: ${character.achievementPoints}`
+          )
+          .toBuffer("PNG", (err, buffer) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(buffer);
+            }
+
+            fs.unlinkSync(tmpName);
+          });
       });
   });
 };
