@@ -138,8 +138,8 @@ const getSignature = (name, realm) => {
     .then(getImage);
 };
 
-app.get("/:realm/:name", (req, res) =>
-  getSignature(req.params.name, req.params.realm)
+app.get("/signature", (req, res) =>
+  getSignature(req.query.characterName, req.query.realmName)
     .then(buffer => {
       res.set("Content-Type", "image/png");
       return res.send(buffer);
