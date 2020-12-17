@@ -2,19 +2,31 @@
   "name": "sample-signature-generator-node",
   "version": "0.0.1",
   "description": "A sample app using APIs from develop.battle.net",
-  "main": "index.js",
-  "repository": "https://github.com/blizzard/sample-signature-generator-node",
-  "author": "Blizzard Entertainment",
+  "main": "server.js",
+  "repository": "https://github.com/viglucci/node-wow-signature-generator",
+  "author": "Kevin Viglucci <kviglucci@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node" : ">=12"
+  },
   "dependencies": {
     "bluebird": "^3.5.3",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "gm": "^1.23.1",
     "ramda": "^0.26.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "simple-oauth2": "^2.2.1",
+    "slug": "^2.0.0",
     "throng": "^4.0.0",
     "tmp": "^0.0.33"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon -L server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
