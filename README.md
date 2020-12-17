@@ -34,7 +34,7 @@ You can run the application easily by invoking the `docker-compose -f docker-com
 
 ## Development
 
-Should you wish to experiment with this code and make changes, the application is setup to work with [nodemon](https://www.npmjs.com/package/nodemon) to watch the filesystem and restart anytime a `.js` file is changed. This functionality is enabled by default when runing with the above docker-compose command.
+Should you wish to experiment with this code and make changes, the application is setup to work with [nodemon](https://www.npmjs.com/package/nodemon) to watch the filesystem and restart anytime a `.js` file is changed. This functionality is enabled by default when running with the above docker-compose command.
 
 ## Deploy to Heroku
 
