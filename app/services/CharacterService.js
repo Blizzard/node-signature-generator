@@ -1,22 +1,24 @@
 const fetch = require("node-fetch");
 const slug = require("slug");
 const {
-    NAMESPACE_PROFILE_US,
     DEFAULT_LOCALE
 } = require("../constants");
 
 class CharacterService {
 
-    constructor(oauthClient) {
+    constructor(oauthClient, config) {
         this.oauthClient = oauthClient;
+        this.config = config;
     }
 
-    async getCharacter(characterName, realmName) {
+    async getCharacter(region, realmName, characterName) {
         const oauthToken = await this.oauthClient.getToken();
         const encodedCharacterName = encodeURIComponent(characterName);
         const realmNameSlug = slug(realmName);
-        const characterSummaryDocumentURL = `https://us.api.blizzard.com/profile/wow/character/${realmNameSlug}/${encodedCharacterName}`;
-        const queryParams = new URLSearchParams({ locale: DEFAULT_LOCALE, namespace: NAMESPACE_PROFILE_US })
+        const host = this.config.apiHosts[region];
+        const characterSummaryDocumentURL = `${host}/profile/wow/character/${realmNameSlug}/${encodedCharacterName}`;
+        const namespace = this.config.namespaces.profile[region];
+        const queryParams = new URLSearchParams({ locale: DEFAULT_LOCALE, namespace })
         const documentUri = `${characterSummaryDocumentURL}?${queryParams}`;
         const headers = { Authorization: `Bearer ${oauthToken}` };
         const response = await fetch(documentUri, { headers });

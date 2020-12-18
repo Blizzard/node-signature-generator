@@ -4,8 +4,6 @@ const resourcesPath = path.resolve(__dirname, "../resources/");
 
 const constants = {
     DEFAULT_LOCALE: "en_US",
-    NAMESPACE_STATIC_US: "static-us",
-    NAMESPACE_PROFILE_US: "profile-us",
     BACKGROUND_IMAGE_EMPTY_PATH: path.resolve(resourcesPath, "./images/empty.png"),
     BACKGROUND_IMAGE_ALLIANCE_PATH: path.resolve(resourcesPath, "./images/background-0.png"),
     BACKGROUND_IMAGE_HORDE_PATH: path.resolve(resourcesPath, "./images/background-1.png"),

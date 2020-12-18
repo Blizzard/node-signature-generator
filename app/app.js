@@ -1,4 +1,6 @@
 const express = require("express");
+
+const config = require("./config");
 const OauthClient = require("./oauth/client.js");
 const CharacterService = require("./services/CharacterService");
 const SignatureService = require("./services/SignatureService");
@@ -9,13 +11,13 @@ const oauthOptions = {
       secret: process.env.CLIENT_SECRET
   },
   auth: {
-      tokenHost: "https://us.battle.net"
+      tokenHost: process.env.OAUTH_TOKEN_HOST || "https://us.battle.net"
   }
 };
 
 const oauthClient = new OauthClient({ oauthOptions });
-const characterService = new CharacterService(oauthClient);
-const signatureService = new SignatureService();
+const characterService = new CharacterService(oauthClient, config);
+const signatureService = new SignatureService(config);
 
 const app = express();
 
@@ -25,8 +27,8 @@ app.get("/", async (req, res, next) => {
 
 app.get("/signature", async (req, res, next) => {
   try {
-    const { characterName, realmName } = req.query;
-    const character = await characterService.getCharacter(characterName, realmName);
+    const { characterName, realmName, region } = req.query;
+    const character = await characterService.getCharacter(region, realmName, characterName);
     const characterMedia = await characterService.getCharacterMedia(character);
     const { filename, data } = await signatureService.generateImage(character, characterMedia);
     res.set("Content-Type", "image/png");

@@ -13,14 +13,16 @@ class OAuthClient {
             if (this.token === null || this.token.expired()) {
                 const token = await this.client.clientCredentials.getToken();
                 this.token = this.client.accessToken.create(token);
-                return this.token;
-            } else {
-                return this.token.token.access_token;
             }
+            return this._reduceToken(this.token);
         } catch (err) {
             console.error(`Failed to retrieve client credentials oauth token: ${err.message}`);
             throw err;
         }
+    }
+
+    _reduceToken(token) {
+        return token.token.access_token;;
     }
 }
 
