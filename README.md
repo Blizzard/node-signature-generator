@@ -4,7 +4,7 @@ This application serves as an example node.js application for consuming OAuth AP
 
 ## Example Output
 
-http://localhost:3000/signature?characterName=tmpikaboo&realmName=tichondrius
+http://localhost:3000/signature?region=us&realmName=tichondrius&characterName=tmpikaboo
 
 ![Image of example generated image](./example-signature.png)
 
