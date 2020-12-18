@@ -1,4 +1,3 @@
-const Promise = require("bluebird");
 const express = require("express");
 const OauthClient = require("./oauth/client.js");
 const CharacterService = require("./services/CharacterService");
