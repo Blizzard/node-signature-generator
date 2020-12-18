@@ -39,10 +39,10 @@ app.get("/signature", async (req, res, next) => {
 
 app.use((err, req, res, next) => {
   console.log(err);
-  res.status(500).send(err.toString());
+  res.status(500).send("Internal Service Error");
 });
 
 module.exports = async () => {
   await oauthClient.getToken();
-  return Promise.resolve(app);
+  return app;
 };
