@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:12
 
 WORKDIR /usr/src/app
 
@@ -10,4 +10,4 @@ RUN apt-get update \
 
 RUN npm install --quiet
 
-CMD ["node", "server.js"]
+CMD ["npm", "run", "dev"]
