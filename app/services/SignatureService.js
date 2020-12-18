@@ -1,4 +1,4 @@
-const request = require("request");
+const fetch = require("node-fetch");
 const tmp = require("tmp");
 const fs = require("fs");
 const slug = require("slug");
@@ -18,11 +18,18 @@ const gm = require("gm").subClass({ imageMagick: true });
 
 class SignatureService {
 
+  /**
+   * Downloads the characters media asset, save the file to disk, and returns
+   * the saved filename.
+   * @param {string} mediaUrl The URL to the file to download.
+   * @returns {string}
+   */
   async downloadCharacterMediaAsset(mediaUrl) {
     const tmpName = `${tmp.tmpNameSync()}.png`;
-    return new Promise((resolve, reject) => {
-      request(mediaUrl)
-        .pipe(fs.createWriteStream(tmpName))
+    const response = await fetch(mediaUrl);
+    await new Promise((resolve, reject) => {
+      const fileWriteStream = fs.createWriteStream(tmpName);
+      response.body.pipe(fileWriteStream)
         .on("finish", () => {
           resolve(tmpName);
         })
@@ -30,6 +37,7 @@ class SignatureService {
           reject(err);
         });
     });
+    return tmpName;
   }
 
   getBackgroundImagePath(factionEnum) {
@@ -54,8 +62,6 @@ class SignatureService {
     const identityString = this.buildInfoString(character);
     const itemLevelString = `Item Level: ${character.equipped_item_level} (${character.average_item_level})`;
     const achievementPointsString = `Achievement Points: ${character.achievement_points}`;
-
-    console.log(BACKGROUND_IMAGE_EMPTY_PATH)
 
     return new Promise((resolve, reject) => {
       gm(BACKGROUND_IMAGE_EMPTY_PATH)
