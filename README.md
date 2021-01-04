@@ -10,7 +10,7 @@ http://localhost:3000/signature?region=us&realmName=tichondrius&characterName=tm
 
 ## API Usage
 
-In accordance with the [World of Warcraft Community API Migration](https://develop.battle.net/documentation/world-of-warcraft/community-api-migration-status) this application leverages only the WoW Game Data APIs.
+In accordance with the [World of Warcraft Community API Migration](https://develop.battle.net/documentation/world-of-warcraft/community-api-migration-status), this application leverages only the WoW Game Data APIs.
 
 ## Getting Started
 
@@ -38,6 +38,6 @@ Should you wish to experiment with this code and make changes, the application i
 
 ## Deploy to Heroku
 
-Additionally, this application is compatible with deploying on a free Heroku Account.
+Additionally, this application is compatible with deploying on a free Heroku account.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
